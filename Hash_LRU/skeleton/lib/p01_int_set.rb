@@ -80,7 +80,7 @@ class ResizingIntSet
   end
 
   def insert(num)
-    debugger
+    # debugger
     # if count > num_buckets
     #   #resize!
     unless self.include?(num)
@@ -95,7 +95,9 @@ class ResizingIntSet
   end
 
   def include?(num)
-    !self[num].index(num).nil?
+    # debugger
+    #self[num].index(num).nil?
+    # self[num].include?(num)
   end
 
   private
