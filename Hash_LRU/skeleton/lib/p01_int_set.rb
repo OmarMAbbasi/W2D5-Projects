@@ -41,16 +41,22 @@ class IntSet
   end
 
   def insert(num)
-    debugger
-    @store[num] << num
+    while self[num].nil?
+      @store += Array.new(@store.length) { Array.new }
+    end
+    self[num] << num
   end
 
   def remove(num)
-    
+    if self[num].nil?
+      raise "numbers outside of range"
+    else
+      self[num].reject! {|ele| ele == num }
+    end
   end
 
   def include?(num)
-    return false if @store[num].index(num).nil?
+    return false if self[num].index(num).nil?
     return true
   end
 
@@ -74,24 +80,38 @@ class ResizingIntSet
   end
 
   def insert(num)
+    debugger
+    # if count > num_buckets
+    #   #resize!
+    unless self.include?(num)
+      self[num] << num
+      @count += 1
+    end
+    
   end
 
   def remove(num)
+    @count -= 1
   end
 
   def include?(num)
+    !self[num].index(num).nil?
   end
 
   private
 
   def [](num)
-    # optional but useful; return the bucket corresponding to `num`
+    @store[num % num_buckets]
   end
-
+  
   def num_buckets
     @store.length
   end
 
   def resize!
+    
+    # make new_ris
+    # iterate over all items in @store and #insert them into new_ris
+    # reassign @store = new_ris.store
   end
 end
